@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jayanth Srihaas Karanam — Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & ROOT ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fafaf8;
+  --bg2:#f5f5f3;
+  --text:#1a1a1a;
+  --text-light:#666666;
+  --text-lighter:#999999;
+  --accent:#ff6b35;
+  --accent-alt:#0066cc;
+  --green:#39ff14;
+  --border:#e0e0e0;
+  --font-display:'Playfair Display',serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+html{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6;scroll-behavior:smooth}
+body{background:var(--bg);overflow-x:hidden}
+::selection{background:var(--accent);color:white}
+a{color:var(--accent-alt);text-decoration:none;transition:all .3s}
+a:hover{opacity:.7}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
+
+/* ===== HEADER & NAV ===== */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(250,250,248,0.95);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  padding:20px 40px;
+}
+.header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--text)}
+.logo .accent{color:var(--accent)}
+nav{display:flex;gap:40px;align-items:center}
+nav a{
+  font-size:14px;font-weight:500;color:var(--text-light);
+  text-transform:uppercase;letter-spacing:1px;
+  transition:color .3s;
+  position:relative;
+}
+nav a::after{
+  content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;
+  background:var(--accent);transition:width .3s;
+}
+nav a:hover{color:var(--text);opacity:1}
+nav a:hover::after{width:100%}
+.dark-toggle{
+  background:none;border:1px solid var(--border);padding:8px 16px;
+  border-radius:4px;cursor:pointer;font-size:12px;font-weight:600;
+  color:var(--text);transition:all .3s;
+}
+.dark-toggle:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ===== MAIN CONTENT ===== */
+main{margin-top:80px;max-width:1200px;margin-left:auto;margin-right:auto;padding:0 40px}
+
+/* ===== HERO SECTION ===== */
+.hero{padding:80px 0;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-text h1{
+  font-family:var(--font-display);font-size:clamp(48px,6vw,72px);
+  font-weight:800;line-height:1.1;margin-bottom:16px;
+}
+.hero-text h1 .accent{color:var(--accent)}
+.hero-text .tagline{
+  font-size:14px;color:var(--text-lighter);letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:24px;
+}
+.hero-text .subtitle{
+  font-size:18px;color:var(--text-light);line-height:1.8;margin-bottom:32px;max-width:500px;
+}
+.hero-image{
+  width:100%;height:400px;background:linear-gradient(135deg,#f0f0f0 0%,#e8e8e8 100%);
+  border-radius:8px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-lighter);font-size:14px;
+}
+
+/* ===== TIMELINE NAV ===== */
+.timeline-nav{
+  display:flex;gap:0;margin:60px 0;position:relative;
+  border-top:2px dashed var(--green);border-bottom:2px dashed var(--green);
+  padding:20px 0;
+}
+.timeline-nav a{
+  flex:1;text-align:center;padding:10px 20px;
+  font-size:13px;font-weight:600;color:var(--text-light);
+  text-transform:uppercase;letter-spacing:1px;
+  position:relative;transition:all .3s;
+  border:2px solid transparent;
+}
+.timeline-nav a::before{
+  content:'';position:absolute;top:-26px;left:50%;transform:translateX(-50%);
+  width:12px;height:12px;background:var(--green);border-radius:50%;
+}
+.timeline-nav a:hover{color:var(--text);background:rgba(255,107,53,0.05)}
+.timeline-nav a.active{color:var(--accent);border-bottom:2px solid var(--accent)}
+
+/* ===== SECTIONS ===== */
+section{display:none;padding:60px 0;animation:fadeIn .5s ease-in}
+section.active{display:block}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.section-label{
+  font-size:12px;color:var(--accent);font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;
+}
+.section-title{
+  font-family:var(--font-display);font-size:48px;font-weight:700;
+  margin-bottom:48px;border-bottom:2px solid var(--text);padding-bottom:16px;
+}
+
+/* ===== ABOUT SECTION ===== */
+.about-content{display:grid;grid-template-columns:1.5fr 1fr;gap:60px}
+.about-text{font-size:16px;line-height:1.8;color:var(--text-light)}
+.about-text p{margin-bottom:20px}
+.about-text p:first-child::first-letter{
+  font-size:48px;font-weight:700;color:var(--accent);
+  float:left;line-height:1;margin-right:8px;
+}
+.about-sidebar{display:flex;flex-direction:column;gap:24px}
+.info-card{
+  background:white;border:1px solid var(--border);border-radius:8px;
+  padding:20px;transition:all .3s;
+}
+.info-card:hover{border-color:var(--accent);box-shadow:0 4px 12px rgba(255,107,53,0.1)}
+.info-label{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.info-value{font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px}
+.info-sub{font-size:13px;color:var(--text-light)}
+
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:24px}
+.skill-tag{
+  background:white;border:1px solid var(--border);border-radius:6px;
+  padding:10px 14px;text-align:center;font-size:13px;font-weight:500;
+  color:var(--text);transition:all .3s;cursor:default;
+}
+.skill-tag:hover{border-color:var(--accent);background:rgba(255,107,53,0.05)}
+
+/* ===== WORK SECTION ===== */
+.work-item{
+  display:grid;grid-template-columns:180px 1fr;gap:40px;
+  padding:40px 0;border-bottom:1px solid var(--border);
+}
+.work-item:last-child{border-bottom:none}
+.work-date{
+  font-size:13px;color:var(--text-lighter);font-weight:500;
+  font-family:var(--font-mono);
+}
+.work-details h3{
+  font-size:20px;font-weight:700;margin-bottom:8px;color:var(--text)
+}
+.work-company{font-size:13px;color:var(--accent);font-weight:600;margin-bottom:16px}
+.work-description{font-size:15px;color:var(--text-light);line-height:1.8;margin-bottom:16px}
+.work-metrics{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px}
+.metric{
+  background:white;border:1px solid var(--border);border-radius:6px;
+  padding:12px 16px;text-align:center;
+}
+.metric-value{font-size:18px;font-weight:700;color:var(--accent)}
+.metric-label{font-size:11px;color:var(--text-lighter);margin-top:4px}
+
+/* ===== EDUCATION SECTION ===== */
+.education-item{
+  background:white;border:1px solid var(--border);border-radius:8px;
+  padding:28px;margin-bottom:20px;transition:all .3s;
+  border-left:4px solid var(--accent);
+}
+.education-item:hover{box-shadow:0 4px 16px rgba(0,0,0,0.05)}
+.education-degree{font-size:18px;font-weight:700;margin-bottom:6px}
+.education-school{font-size:14px;color:var(--accent);font-weight:600;margin-bottom:6px}
+.education-year{font-size:12px;color:var(--text-lighter);font-family:var(--font-mono)}
+.education-note{font-size:13px;color:var(--text-light);margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+
+.certifications{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:32px}
+.cert-card{
+  background:white;border:1px solid var(--border);border-radius:8px;
+  padding:20px;display:flex;gap:16px;transition:all .3s;
+}
+.cert-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.cert-icon{
+  width:40px;height:40px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;background:rgba(255,107,53,0.1)
+}
+.cert-info h4{font-size:14px;font-weight:600;margin-bottom:4px}
+.cert-info p{font-size:12px;color:var(--text-lighter)}
+
+/* ===== CONTACT SECTION ===== */
+.contact-content{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.contact-text{font-size:16px;line-height:1.8;color:var(--text-light);margin-bottom:32px}
+.contact-buttons{display:flex;gap:16px;flex-wrap:wrap}
+.btn{
+  padding:14px 28px;border-radius:6px;font-weight:600;
+  font-size:14px;cursor:pointer;transition:all .3s;
+  border:none;text-decoration:none;display:inline-block;
+  font-family:var(--font-body);text-transform:uppercase;letter-spacing:1px;
+}
+.btn-primary{background:var(--accent);color:white}
+.btn-primary:hover{background:#ff5722;opacity:1}
+.btn-secondary{border:2px solid var(--accent);color:var(--accent);background:transparent}
+.btn-secondary:hover{background:rgba(255,107,53,0.1);opacity:1}
+
+.contact-links{display:flex;flex-direction:column;gap:12px}
+.contact-link{
+  display:flex;align-items:center;gap:16px;padding:16px;
+  background:white;border:1px solid var(--border);border-radius:6px;
+  transition:all .3s;
+}
+.contact-link:hover{border-color:var(--accent);background:rgba(255,107,53,0.02)}
+.contact-label{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:1px;text-transform:uppercase;min-width:60px}
+.contact-value{font-size:14px;color:var(--text);font-weight:500}
+
+/* ===== FOOTER ===== */
+footer{
+  border-top:1px solid var(--border);padding:40px;
+  text-align:center;color:var(--text-lighter);font-size:13px;
+  margin-top:80px;
+}
+
+/* ===== BACK TO TOP ===== */
+.back-to-top{
+  position:fixed;bottom:40px;right:40px;
+  width:40px;height:40px;border-radius:50%;
+  background:var(--accent);color:white;
+  display:none;align-items:center;justify-content:center;
+  cursor:pointer;font-size:18px;z-index:999;
+  transition:all .3s;
+}
+.back-to-top.show{display:flex}
+.back-to-top:hover{transform:translateY(-4px);box-shadow:0 8px 16px rgba(255,107,53,0.3)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  header{padding:16px 20px}
+  nav{gap:20px;font-size:12px}
+  main{padding:0 20px}
+  .hero{grid-template-columns:1fr;gap:40px;padding:40px 0}
+  .about-content,.contact-content{grid-template-columns:1fr}
+  .work-item{grid-template-columns:1fr;gap:20px}
+  .section-title{font-size:32px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-content">
+    <div class="logo">Jayanth<span class="accent">.</span>Srihaas</div>
+    <nav>
+      <a href="#intro" class="nav-link active">Intro</a>
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#education" class="nav-link">Education</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="resume.pdf" target="_blank" style="text-transform:uppercase;font-size:12px;font-weight:600">Résumé ↗</a>
+    </nav>
+    <button class="dark-toggle" id="darkToggle">◐ DARK</button>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main>
+
+
+
+  <!-- TIMELINE NAVIGATION -->
+  <div class="timeline-nav">
+    <a href="#intro" class="timeline-link active">Intro</a>
+    <a href="#work" class="timeline-link">Work</a>
+    <a href="#education" class="timeline-link">Education</a>
+    <a href="#contact" class="timeline-link">Contact</a>
+    <a href="resume.pdf" target="_blank" class="timeline-link">Résumé ↗</a>
+  </div>
+
+  <!-- ABOUT SECTION -->
+  <section id="intro" class="active">
+    <div class="section-label">01 — About</div>
+    <div class="section-title">Intro</div>
+    <div class="about-content">
+      <div class="about-text">
+        <p>Software Engineer with 5 years of experience building scalable full-stack applications, designing automated test frameworks, and shipping AI-powered features across cloud-native environments. I specialize in transforming complex technical challenges into elegant solutions that drive measurable business impact.</p>
+        <p>My expertise spans full-stack development with React.js, Java/Spring Boot, Python, Node.js, and TypeScript, combined with deep knowledge of CI/CD pipelines, microservices architecture, LLM integration, and agentic AI workflows. Currently at Lif3away in Los Angeles, I'm architecting AI-driven rental platforms that serve thousands of users, optimizing property matching algorithms, and building secure payment infrastructure processing $500K+ monthly transactions.</p>
+        <p>I'm particularly passionate about the intersection of intelligent systems and exceptional user experiences. Whether it's designing RAG pipelines for semantic search, optimizing database queries for sub-200ms response times, or crafting responsive frontends that scale seamlessly, I approach each project with a focus on both technical excellence and real-world impact. I'm always excited to collaborate with teams building AI-powered products that solve meaningful problems.</p>
+      </div>
+      <div class="about-sidebar">
+        <div class="info-card">
+          <div class="info-label">Current Role</div>
+          <div class="info-value">Software Engineer</div>
+          <div class="info-sub">Lif3away, Los Angeles</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">Previous Role</div>
+          <div class="info-value">Software Developer</div>
+          <div class="info-sub">Capital One</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">Education</div>
+          <div class="info-value">M.S. Computer Science</div>
+          <div class="info-sub">Cal State Dominguez Hills</div>
+        </div>
+        <div>
+          <div class="info-label" style="margin-bottom:12px">Skills</div>
+          <div class="skills-grid">
+            <div class="skill-tag">React.js</div>
+            <div class="skill-tag">Java</div>
+            <div class="skill-tag">Python</div>
+            <div class="skill-tag">TypeScript</div>
+            <div class="skill-tag">Node.js</div>
+            <div class="skill-tag">Spring Boot</div>
+            <div class="skill-tag">FastAPI</div>
+            <div class="skill-tag">AWS</div>
+            <div class="skill-tag">GCP</div>
+            <div class="skill-tag">Docker</div>
+            <div class="skill-tag">Kubernetes</div>
+            <div class="skill-tag">LangChain</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK SECTION -->
+  <section id="work">
+    <div class="section-label">02 — Experience</div>
+    <div class="section-title">Work</div>
+    
+    <div class="work-item">
+      <div class="work-date">Sep 2024 — Present</div>
+      <div class="work-details">
+        <h3>Software Engineer</h3>
+        <div class="work-company">Lif3away</div>
+        <div class="work-description">
+          Architected Python/FastAPI microservices powering AI-driven rental workflows across 3 city deployments. Integrated LLM-based semantic search APIs with vector embeddings, improving property discovery relevance by 30%. Designed automated test framework catching 85% of regressions before staging.
+        </div>
+        <div class="work-metrics">
+          <div class="metric"><div class="metric-value">40%</div><div class="metric-label">Latency ↓</div></div>
+          <div class="metric"><div class="metric-value">30%</div><div class="metric-label">Relevance ↑</div></div>
+          <div class="metric"><div class="metric-value">85%</div><div class="metric-label">Bugs Caught</div></div>
+          <div class="metric"><div class="metric-value">$500K+</div><div class="metric-label">Monthly Txns</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="work-date">Mar 2024 — Aug 2024</div>
+      <div class="work-details">
+        <h3>Software Developer</h3>
+        <div class="work-company">Capital One</div>
+        <div class="work-description">
+          Developed scalable CRM application using React.js, Next.js, Node.js with SSR, driving 20% increase in user engagement. Owned test strategy and release readiness with 95% bug detection rate. Optimized PostgreSQL/MS SQL cutting query execution time by 40%.
+        </div>
+        <div class="work-metrics">
+          <div class="metric"><div class="metric-value">95%</div><div class="metric-label">Bug Detection</div></div>
+          <div class="metric"><div class="metric-value">35%</div><div class="metric-label">API Time ↓</div></div>
+          <div class="metric"><div class="metric-value">30%</div><div class="metric-label">Release ↓</div></div>
+          <div class="metric"><div class="metric-value">40%</div><div class="metric-label">Query ↓</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="work-date">May 2020 — Jul 2022</div>
+      <div class="work-details">
+        <h3>Software Engineer</h3>
+        <div class="work-company">Cognizant</div>
+        <div class="work-description">
+          Developed enterprise insurance applications in Agile/Scrum. Architected automated regression test suites using Cypress and Selenium, reducing manual QA effort by 90%. Built REST APIs in Java and Python with Kafka and Redis pipelines reducing API latency by 25%.
+        </div>
+        <div class="work-metrics">
+          <div class="metric"><div class="metric-value">90%</div><div class="metric-label">QA Effort ↓</div></div>
+          <div class="metric"><div class="metric-value">25%</div><div class="metric-label">Latency ↓</div></div>
+          <div class="metric"><div class="metric-value">30%</div><div class="metric-label">Downtime ↓</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION SECTION -->
+  <section id="education">
+    <div class="section-label">03 — Academic</div>
+    <div class="section-title">Education</div>
+    
+    <div class="education-item">
+      <div class="education-degree">M.S. Computer Science</div>
+      <div class="education-school">California State University, Dominguez Hills</div>
+      <div class="education-year">Aug 2022 — May 2024</div>
+      <div class="education-note">Application Developer (Part-Time) — Built student-facing web apps with React.js/Vite serving 5,000+ users; designed UI/UX prototypes in Figma increasing engagement by 55%.</div>
+    </div>
+
+    <h3 style="font-size:18px;font-weight:700;margin:40px 0 20px;border-bottom:2px solid var(--text);padding-bottom:12px">Certifications</h3>
+    <div class="certifications">
+      <div class="cert-card">
+        <div class="cert-icon">☁</div>
+        <div class="cert-info">
+          <h4>Azure Fundamentals (AZ-900)</h4>
+          <p>Microsoft</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">☁</div>
+        <div class="cert-info">
+          <h4>Azure Administrator Associate (AZ-104)</h4>
+          <p>Microsoft</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">⚡</div>
+        <div class="cert-info">
+          <h4>Full Stack Web Development</h4>
+          <p>Edureka</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">✦</div>
+        <div class="cert-info">
+          <h4>Generative AI</h4>
+          <p>DeepLearning.AI</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">✦</div>
+        <div class="cert-info">
+          <h4>Claude Code Certification</h4>
+          <p>Anthropic</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">✦</div>
+        <div class="cert-info">
+          <h4>AI Engineer Core Track</h4>
+          <p>Udemy</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact">
+    <div class="section-label">04 — Contact</div>
+    <div class="section-title">Get in Touch</div>
+    <div class="contact-content">
+      <div>
+        <p class="contact-text">Open to full-time Software Engineer, Full Stack Engineer, and Frontend Engineer roles. Especially interested in teams building AI-powered products at scale.</p>
+        <div class="contact-buttons">
+          <a href="mailto:jayanth.srihaas8@gmail.com" class="btn btn-primary">Say Hello ↗</a>
+          <a href="resume.pdf" target="_blank" download class="btn btn-secondary">Download Resume</a>
+        </div>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:jayanth.srihaas8@gmail.com" class="contact-link">
+          <div class="contact-label">Email</div>
+          <div class="contact-value">jayanth.srihaas8@gmail.com</div>
+        </a>
+        <a href="https://www.linkedin.com/in/jayanth-srihaas-9ba444182/" target="_blank" class="contact-link">
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">in/jayanthsrihaas111</div>
+        </a>
+        <a href="https://github.com/jayanthsrihaas111" target="_blank" class="contact-link">
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value">jayanthsrihaas111</div>
+        </a>
+        <a href="tel:+15628377759" class="contact-link">
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">(562) 837-7759</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>Jayanth Srihaas Karanam · © 2026 · All rights reserved</p>
+</footer>
+
+<!-- BACK TO TOP -->
+<div class="back-to-top" id="backToTop">↑</div>
+
+<script>
+// Navigation and Section Display
+document.querySelectorAll('nav a, .timeline-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if(href.startsWith('#') && href !== '#') {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if(target && target.tagName === 'SECTION') {
+        // Hide all sections
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        // Show target section
+        target.classList.add('active');
+        // Update nav
+        updateActiveNav(href);
+        // Scroll to section
+        target.scrollIntoView({behavior:'smooth'});
+      }
+    }
+  });
+});
+
+function updateActiveNav(hash) {
+  document.querySelectorAll('nav a, .timeline-link').forEach(link => {
+    link.classList.remove('active');
+    if(link.getAttribute('href') === hash) link.classList.add('active');
+  });
+}
+
+// Scroll to top
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 300) backToTop.classList.add('show');
+  else backToTop.classList.remove('show');
+});
+backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+// Dark mode toggle
+let isDarkMode = localStorage.getItem('darkMode') === 'true';
+const darkToggle = document.getElementById('darkToggle');
+
+function applyDarkMode() {
+  document.documentElement.style.setProperty('--bg', '#1a1a1a');
+  document.documentElement.style.setProperty('--bg2', '#2a2a2a');
+  document.documentElement.style.setProperty('--text', '#f5f5f5');
+  document.documentElement.style.setProperty('--text-light', '#b0b0b0');
+  document.documentElement.style.setProperty('--text-lighter', '#808080');
+  document.documentElement.style.setProperty('--border', '#333333');
+  darkToggle.textContent = '☀ LIGHT';
+  localStorage.setItem('darkMode', 'true');
+}
+
+function applyLightMode() {
+  document.documentElement.style.setProperty('--bg', '#fafaf8');
+  document.documentElement.style.setProperty('--bg2', '#f5f5f3');
+  document.documentElement.style.setProperty('--text', '#1a1a1a');
+  document.documentElement.style.setProperty('--text-light', '#666666');
+  document.documentElement.style.setProperty('--text-lighter', '#999999');
+  document.documentElement.style.setProperty('--border', '#e0e0e0');
+  darkToggle.textContent = '◐ DARK';
+  localStorage.setItem('darkMode', 'false');
+}
+
+// Load saved preference on page load
+if(isDarkMode) {
+  applyDarkMode();
+} else {
+  applyLightMode();
+}
+
+// Toggle on button click
+darkToggle.addEventListener('click', function() {
+  isDarkMode = !isDarkMode;
+  if(isDarkMode) {
+    applyDarkMode();
+  } else {
+    applyLightMode();
+  }
+});
+</script>
+</body>
+</html>
